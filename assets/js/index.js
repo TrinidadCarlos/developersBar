@@ -45,8 +45,9 @@ class InitApp {
 
   // api class
 
-  constructor() {
-    // se ejecuta para que se cree el elemento div con el canvas... por defecto tiene un zindex de 100
+  constructor() {}
+  startPage () {
+     // se ejecuta para que se cree el elemento div con el canvas... por defecto tiene un zindex de 100
     // esto para que cuando se de click en gurdar, se le agregue una clase con z-index mas alto... ver
     // la funcion makeConfetti
     confetti({
@@ -58,7 +59,8 @@ class InitApp {
 
     this.getLoginElements();
     const reloadPage = this.checkStatusPage();
-
+    
+    
     if (reloadPage === false) {
       // no ha cargado la página antes... primer inicio
       this.assignEvents();
@@ -72,10 +74,11 @@ class InitApp {
     const status = localStorage.getItem("statusPage");
     let stat = false;
     if (isNil(status) === false) {
-      stat = status == statusPage.in ? true : false;
+      stat = true;
       this.pageWasOpened = true;
     } else {
       stat = false;
+      this.pageWasOpened = false;
     }
 
        // revisamos si existen favoritos... para mostrar la opción del menú..
@@ -305,27 +308,32 @@ class InitApp {
 
   initMainPage() {
     this.getMainElements();
-    showHideMainLogin({
-      show: true,
-      loginElement: this.loginElement,
-      mainContent: this.mainContent,
-    });
 
-    showHideLoader({
-      fullLoader,
-      show: false,
-    });
+    setTimeout(() => {
+        showHideMainLogin({
+          show: true,
+          loginElement: this.loginElement,
+          mainContent: this.mainContent,
+        });
+    
+        showHideLoader({
+          fullLoader,
+          show: false,
+        });    
+    
+        // POR DEFECTO VA A SER LA OPCIÓN DE "COCKTAILS" DEL MENÚ...
+        if (this.pageWasOpened === true) {
+          // LA OPCION DE COCKTAILS ES UN MENU DE LA  A HASTA LA Z
+          this.navSelected = "cocktails";
+          const titleData = navOptions.cocktails;
+          changePageTitle(titleData);
+          showHideAlphabet(true);
+          this.alphabetEvents();
+          this.initialDataReload('A');
+        }
 
-    // POR DEFECTO VA A SER LA OPCIÓN DE "COCKTAILS" DEL MENÚ...
-    if (this.pageWasOpened === true) {
-      // LA OPCION DE COCKTAILS ES UN MENU DE LA  A HASTA LA Z
-      this.navSelected = "cocktails";
-      const titleData = navOptions.cocktails;
-      changePageTitle(titleData);
-      showHideAlphabet(true);
-      this.alphabetEvents();
-      this.initialDataReload();
-    }
+    },1000);
+
   }
 
      navEvents () {
@@ -374,6 +382,11 @@ class InitApp {
           
             switch (op) {
                 case navOptions.cocktails.id:
+                  const letters = document.querySelectorAll(".alphabet-letter");
+                  this.resetAlphabet(letters);
+                  this.alphabetEvents();
+                  this.alphabetLetterSelected = 'A';
+                    this.initialDataReload('A');
                     try {
                         showHideLoader({
                             fullLoader,
@@ -595,6 +608,8 @@ class InitApp {
                         this.assignEvents();
                          this.mainContent.classList.add('d-none');
                          this.loginElement.classList.remove('d-none');
+                         const letters = document.querySelectorAll(".alphabet-letter");
+                         this.resetAlphabet(letters);
     
                          showHideLoader({
                             fullLoader: this.fullLoader,
@@ -647,11 +662,7 @@ class InitApp {
               const cardsContainer = getById('cardsContainer');
               clearCardsContainer({cardsContainer});
           
-          letters.forEach((ls) => {
-            if (ls.classList.contains("alphabet-selected")) {
-                ls.classList.remove("alphabet-selected");
-            }
-        });
+       this.resetAlphabet(letters);
         
         this.alphabetLetterSelected = e.target.dataset.letter;
         e.target.classList.add("alphabet-selected"); // indica la letra que tenemos seleccionada...
@@ -663,19 +674,26 @@ class InitApp {
     }
    }
 
+   resetAlphabet (letters = []) {
+    letters.forEach((ls) => {
+      if (ls.classList.contains("alphabet-selected")) {
+          ls.classList.remove("alphabet-selected");
+      }
+    });
+   }
+
    async initialDataReload (letter = 'A') {
     
           // remover la clase de "alphabet-selected" antes de colocarla al nuevo click
           const apiC = new ApiClass();
 
           // si la pagina fue recargada, se pone en automatico la letra A en la opción de cocktails
-          if (this.pageWasOpened === true) {
+          // if (this.pageWasOpened === true) {
             const alphabetLetter = getById(this.alphabetLetterSelected);
             if (isNil(alphabetLetter) === false) {
                 alphabetLetter.classList.add("alphabet-selected");
-
             }
-          }
+          // }
 
 
     try {
@@ -709,4 +727,5 @@ class InitApp {
 
 window.addEventListener("DOMContentLoaded", () => {
     const initApp = new InitApp();
+    initApp.startPage();
 });

@@ -10,4 +10,6 @@ Developers bar
     - Aún NO es óptima para resoluciones pequeñas
 
 
-LINK ==> https://65c12bf06c8559009c346aa3--willowy-mousse-e7d40e.netlify.app/
+LINK ==> https://developersbar.netlify.app/
+
+<span>![</span><span>Log preview</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/parzibyte/WaterPy/master/assets/ImagenV1.png</span><span>)</span>
