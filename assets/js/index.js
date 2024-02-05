@@ -379,7 +379,6 @@ class InitApp {
                 apiC = new ApiClass();
             }
 
-          
             switch (op) {
                 case navOptions.cocktails.id:
                   const letters = document.querySelectorAll(".alphabet-letter");
@@ -546,7 +545,6 @@ class InitApp {
                   
                       
                       const searchMainBtn = getById('searchMainBtn');
-
                       if(isNil(searchMainBtn) === false ) {
                         const apiC = new ApiClass();
                         searchMainBtn.addEventListener('click', async() => {
@@ -595,7 +593,7 @@ class InitApp {
                         show: false,
                       });
 
-                    },1500);
+                    },1000);
                     break;
                 case navOptions.logout.id:
                     showHideLoader({
@@ -619,8 +617,7 @@ class InitApp {
 
 
                     break;
-                  
-                    case navOptions.favorites.id:
+                 case navOptions.favorites.id:
                       showHideLoader({
                           fullLoader: this.fullLoader,
                           show: true
