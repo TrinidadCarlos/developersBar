@@ -12,4 +12,4 @@ Developers bar
 
 LINK ==> https://developersbar.netlify.app/
 
-<span>![</span><span>Log preview</span><span>]</span><span>(</span><span>https://raw.githubusercontent.com/parzibyte/WaterPy/master/assets/ImagenV1.png</span><span>)</span>
+![alt text](image.png)
