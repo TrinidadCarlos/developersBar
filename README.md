@@ -12,4 +12,7 @@ Developers bar
 
 LINK ==> https://developersbar.netlify.app/
 
-![alt text](image.png)
+![alt text](assets/img/previews/image.png)
+![alt text](assets/img/previews/navbar.png)
+![alt text](assets/img/previews/cocktails.png)
+![alt text](assets/img/previews/favorites.png)
