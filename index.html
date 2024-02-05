@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />  
+
+    <link rel="stylesheet" href="./assets/styles/index.css" />
+
+    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js
+    "></script>
+
+    <!-- AGREGA TU LINK DE FONTAWESOME AQUI PARA VER LOS ICONOS -->
+
+        <!-- tsParticles confetti -->
+        <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="./assets/js/index.js" type="module"></script>
+
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!-- PARTE DEL FAKE LOGIN -->
+    <section id="fakeLogin" class="row">
+      <div class="col-md-6 p-0 bg-primary">
+        <img src="./assets/img/bg-1.jpg" class="img-login" alt="" />
+      </div>
+
+      <div class="col-md-6 p-0 dark-bg pt-3 pt-md-0">
+        <div class="d-flex justify-content-center container-login">
+          <!-- PAGE TITLE -->
+
+          <div class="d-flex flex-column justify-content-center">
+            <section class="d-flex justify-content-center">
+              <p class="mb-0 icon-title">
+                <i class="fas fa-martini-glass-citrus"></i>
+              </p>
+              <p class="f-700 mb-0 text-center text-white login-title">
+                Developers Bar
+              </p>
+            </section>
+
+            <section class="mt-3">
+              <p class="f-700 mb-0 text-center text-white login-title">
+                <!-- Let's Drink!! -->
+                login...
+              </p>
+              <p class="f-700 mb-0 text-center text-white login-title-small">
+                with a cocktail or ingredient
+              </p>
+
+              <div class="text-center mt-2" id="buttonsSelect">
+                <button class="btn btn-outline-primary" id="buttonCocktail" >
+                  <i class="fas fa-champagne-glasses mr-2"></i>
+                  Cocktail</button>
+                <span class="mx-2 text-white" >OR</span>
+                <button class="btn btn-outline-success" id="buttonIngredient">
+                  <i class="fas fa-leaf mr-2"></i>
+                  Ingredient</button>
+              </div>
+              
+              <div class="d-none" id="inputSearchContainer">
+              <div class="text-center">
+                <p class="f-400 mb-0 text-white mt-3" id="optionSelectedP">
+                  <!-- Cocktail / Ingredient name... -->
+                </p>
+
+
+                    <input
+                    type="text"
+                    name="input-login"
+                    id="inputLogin"
+                    class="mt-2 input-local"
+                    />
+                    
+                    <div class="text-end mt-2">
+                      <button class="btn btn-outline-danger" id="searchLoginReturn">
+                        <i class="fas fa-arrow-left text-white mr-2"></i>
+                    </button>
+
+                        <button class="btn btn-outline-warning" id="searchLogin">
+                            <i class="fas fa-door-open mr-2"></i>
+                            Login
+                        </button>
+                    </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FULL LOADER -->
+    <section class="full-loader d-none" id="fullLoader">
+      <div class="full-loader-img">
+        <img src="./assets/img/img-1.jpg" alt="" class="img-fluid" />
+      </div>
+      <p class="text-center text-white mb-0">Looking For Drink!!</p>
+    </section>
+
+    <!-- MAIN MENU -->
+    <main class="main d-none" id="mainContent">
+      <nav id="navbar">
+        <ul class="navbar-items flexbox-col">
+          <li class="navbar-logo">
+            <section
+              class="d-flex justify-content-center align-items-center pl-2"
+            >
+              <p class="mb-0 icon-nav">
+                <i class="fas fa-martini-glass-citrus"></i>
+              </p>
+              <p class="f-700 mb-0 text-center text-white login-nav-title">
+                Developers Bar
+              </p>
+            </section>
+          </li>
+
+          <li class="navbar-item    flexbox-left">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-champagne-glasses text-white"></i>
+              </div>
+              <span class="link-text" data-menu="cocktails" id="cocktails" >Cocktails</span>
+            </a>
+          </li>
+
+          <li class="navbar-item  flexbox-left">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-repeat text-white"></i>
+              </div>
+              <span class="link-text" data-menu="randoms" id="randoms" >15 Random drinks</span>
+            </a>
+          </li>
+
+          <li class="navbar-item  flexbox-left">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-bottle-droplet text-white"></i>
+              </div>
+              <span class="link-text"data-menu="drinksWhitAlcohol" id="drinksWhitAlcohol" >Drinks whit alcohol</span>
+            </a>
+          </li>
+
+          <li class="navbar-item  flexbox-left">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-ban text-white"></i>
+              </div>
+              <span class="link-text" data-menu="drinksWhithountAlcohol" id="drinksWhithountAlcohol" >Drinks whithout alcohol</span>
+            </a>
+          </li>
+
+          <li class="navbar-item  flexbox-left">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-signature text-white"></i>
+              </div>
+              <span class="link-text" data-menu="cocktailByName" id="cocktailByName" >Cocktail by name</span>
+            </a>
+          </li>
+
+          <li class="navbar-item  flexbox-left">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-leaf text-white"></i>
+              </div>
+              <span class="link-text" data-menu="cocktailByIngredient  id="cocktailByIngredient"" >Cocktail by ingredient</span>
+            </a>
+          </li>
+          
+          <li class="navbar-item  flexbox-left d-none" id="favoritesLink">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-star text-warning"></i>
+              </div>
+              <span class="link-text" data-menu="favorites" id="favorites" >My Favorites</span>
+            </a>
+          </li>
+          
+          <li class="navbar-item  flexbox-left">
+            <a class="navbar-item-inner flexbox-left">
+              <div class="navbar-item-inner-icon-wrapper flexbox">
+                <i class="fas fa-right-from-bracket text-danger"></i>
+              </div>
+              <span class="link-text" data-menu="logout" id="logout" >logout</span>
+            </a>
+          </li>
+
+
+
+        </ul>
+      </nav>
+
+      <section class="main-section">
+        <!-- TITULO -->
+        <div class="d-flex justify-content-end align-items-center gap-2">
+          <h5 class="mb-0 text-end" id="iconTitlePage">
+            <!-- <i class="fas fa-leaf  text-white" ></i> -->
+          </h5>
+          
+            <h4 class="mb-0 mr-5 text-white text-end" id="pageTitle" >
+              <!-- Drinks whithout alcohol -->
+            </h4>
+          </div>
+
+         <!-- LISTADO DE LA A HASTA LA Z -->
+         <div class="row justify-content-center d-none" id="alphabetContainer">
+          <div class="col-md-6">
+            <ul class="d-flex gap-2 list-unstyled text-white justify-content-between alphabet ">
+              <li class="alphabet-letter" id="A" data-letter="A" >A</li>
+              <li class="alphabet-letter" id="B" data-letter="B" >B</li>
+              <li class="alphabet-letter" id="C" data-letter="C" >C</li>
+              <li class="alphabet-letter" id="D" data-letter="D" >D</li>
+              <li class="alphabet-letter" id="E" data-letter="E" >E</li>
+              <li class="alphabet-letter" id="F" data-letter="F" >F</li>
+              <li class="alphabet-letter" id="G" data-letter="G" >G</li>
+              <li class="alphabet-letter" id="H" data-letter="H" >H</li>
+              <li class="alphabet-letter" id="I" data-letter="I" >I</li>
+              <li class="alphabet-letter" id="J" data-letter="J" >J</li>
+              <li class="alphabet-letter" id="K" data-letter="K" >K</li>
+              <li class="alphabet-letter" id="L" data-letter="L" >L</li>
+              <li class="alphabet-letter" id="M" data-letter="M" >M</li>
+              <li class="alphabet-letter" id="N" data-letter="N" >N</li>
+              <li class="alphabet-letter" id="Ñ" data-letter="Ñ" >Ñ</li>
+              <li class="alphabet-letter" id="O" data-letter="O" >O</li>
+              <li class="alphabet-letter" id="P" data-letter="P" >P</li>
+              <li class="alphabet-letter" id="Q" data-letter="Q" >Q</li>
+              <li class="alphabet-letter" id="R" data-letter="R" >R</li>
+              <li class="alphabet-letter" id="S" data-letter="S" >S</li>
+              <li class="alphabet-letter" id="T" data-letter="T" >T</li>
+              <li class="alphabet-letter" id="U" data-letter="U" >U</li>
+              <li class="alphabet-letter" id="V" data-letter="V" >V</li>
+              <li class="alphabet-letter" id="W" data-letter="W" >W</li>
+              <li class="alphabet-letter" id="X" data-letter="X" >X</li>
+              <li class="alphabet-letter" id="Y" data-letter="Y" >Y</li>
+              <li class="alphabet-letter" id="Z" data-letter="Z" >Z</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- APARECE CUANDO SE SELECCIONA COCKTAIL BY NAME OR COCKTAIL BY INGREDIENT -->
+        <div class="row justify-content-end d-none mb-2" id="searchMain">
+          <div class="col-md-2 text-center">
+            <input
+              type="text"
+              name="input-login"
+              id="inputSearchMain"
+              class="mt-2 input-local"
+            />
+            <div class="text-end mt-2">
+              <button class="btn btn-outline-warning" id="searchMainBtn">
+                <i class="fas fa-magnifying-glass mr-2"></i>
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- CARDS  -->
+        <section class="cards-container mt-3" >
+          <!-- TEMPLATE COCKTAILS -->
+          <div class="row gap-5" id="cardsContainer">
+            
+            <!-- <template id="templateRegularCards">
+              <div class="col-md-2 card-block " id="">
+
+                <p class="mb-0 text-end">
+                  <i class="fas fa-bookmark text-white mr-2"> </i>
+                </p>
+                
+                <img src="./assets/img/drink-1.jpg" alt="" id="imgCardCocktail" />
+                <p class="mb-0 text-center text-white drink-title" id="titleCardCocktail">
+                  Drinks whithout alcohol
+                </p>
+
+                <div class="text-start">
+                  <p class="mb-0  text-white drink-info" id="">
+                    Drink Category: <span id="drinkCategory" >Simple drink</span>
+                  </p>
+                  <p class="mb-0  text-white drink-info id="">
+                    Alcoholic Drink: <span id="alchoholicDrink" >Yes</span>
+                  </p>
+                </div>
+
+                <div class="text-center mt-2">
+                  <button class="btn btn-warning" id="instructionsButton">
+                    <i class="fas fa-book text-dark mr-2"></i>
+                    Instructions
+                  </button>
+                </div>
+  
+              </div> 
+            </template> -->
+                 
+             
+            </div>
+
+        </section>
+      </section>
+    </main>
+
+
+      <div class="modal-container d-none" id="modalCocktails">
+          <div class="modal-drinks">
+              <header class="header-modal mb-3 pt-2 container" >
+                  <p class="mb-0 text-end"> 
+                       <i class="fas fa-times text-danger close-modal-icon" id="closeCocktailModal"></i>
+                  </p>
+              </header>
+  
+              <main>
+                  <section class="row content-modal justify-content-lg-center align-items-center container">
+                      <div class="col-md-6 col-lg-4 modal-img" id="titleImgCocktail">   
+                          <h6 class="" id="modalCocktailTitle">
+                            <!-- Margarita -->
+                          </h6>
+                          <!-- <img src="./assets/img/drink-1.jpg" alt="" class="img-fluid drink-img" id="modalCocktailImg"  > -->
+                      </div>
+                      <div class="col-md-6 col-lg-6 mt-3 mt-md-0">
+                          <div class="row flex-wrap" id="modalCocktailIngContainer">
+
+                              <!-- <p class="col-6 col-lg-4 mb-2 mb-lg-3 mb-md-0">
+                                  <img src="./assets/img/drink-1.jpg" alt="" width="40" height="40" class="rounded">
+                                  <span> Ingredient </span>
+                              </p>  -->
+
+                          </div>
+                      </div>
+      
+                  </section>
+
+                  <section class=" col main-modal mt-2 ">
+                      <div class="container modal-instructions">
+                          <h6>Instrucciones</h6>
+                          <p class="mb-0" id="modalCocktailInstructions" class="">
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo sapiente laboriosam animi, veritatis cupiditate incidunt molestias inventore temporibus delectus molestiae quas accusantium maxime ipsum accusamus quis. Ipsum inventore autem animi hic sit, praesentium voluptatum deserunt a distinctio at corrupti nihil optio vitae enim? Architecto ab neque dolores eaque quidem nemo!
+                          </p>
+                      </div>
+      
+                  </section>
+              </main>
+  
+              <footer class="footer-modal mt-3 container pb-3" >
+                  <div class="text-end">
+                      <button class="btn btn-outline-danger mx-2" id="closeCocktailModalBtn">
+                          <i class="fas fa-times mr-2"  ></i>
+                          Close
+                      </button>
+  
+                      <button class="btn btn-outline-primary" id="addFavoriteBtn">
+                          <i class="fas fa-heart mr-2" ></i>
+                          Favorite
+                      </button>
+                  </div>
+              </footer>
+  
+  
+          </div>
+      </div>
+
+
+  </body>
+  
+</html>
